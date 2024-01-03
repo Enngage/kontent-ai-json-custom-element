@@ -1,7 +1,6 @@
 {
   "extends": [
     "tslint:recommended",
-    "rxjs-tslint-rules",
     "tslint-angular"
   ],
   "rulesDirectory": [
