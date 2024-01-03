@@ -1,5 +1,5 @@
 [build]
-  publish = "dist/custom-element-hot-graphics"
+  publish = "dist/custom-element-json"
   command = "npm run build:prod"
 [[redirects]]
   from = "/*"

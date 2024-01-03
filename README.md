@@ -11,13 +11,13 @@
 
 ## Description
 
-This custom element for [Kentico Kontent](https://kontent.ai) can be used to validate JSON values
+This custom element for [Kentico Kontent](https://kontent.ai) that represents JSON values & their validation
 
 ## Quick Deploy
 
 Netlify has made this easy. If you click the deploy button below, it will guide you through the process of deploying it to Netlify and leave you with a copy of the repository in your account as well.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Enngage/kontent-ai-json-validation-custom-element)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Enngage/kontent-ai-json-custom-element)
 
 ## Configuration
 
@@ -37,8 +37,8 @@ We have collected notes on how to contribute to this project in [CONTRIBUTING.md
 
 Originally created by [@Enngage](https://github.com/Enngage)
 
-<a href="https://github.com/Enngage/kontent-ai-json-validation-custom-element/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Enngage/kontent-ai-json-validation-custom-element" />
+<a href="https://github.com/Enngage/kontent-ai-json-custom-element/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Enngage/kontent-ai-json-custom-element" />
 </a>
 
 ## License
