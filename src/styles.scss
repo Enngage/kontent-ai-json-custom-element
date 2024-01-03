@@ -1,0 +1,235 @@
+@import './app/flex/flex';
+@import './app/positioning/pad';
+@import './app/positioning/push';
+@import './app/positioning/pull';
+
+@include flex();
+@include pad-utilities();
+@include push-utilities();
+@include pull-utilities();
+
+$primaryColor: #db3c00;
+$primaryColorContrast: #fff;
+$secondaryColor: rgb(55, 81, 124);
+$secondaryColorHover: rgb(175, 197, 233);
+$secondaryColorContrast: #525252;
+$linkColor: #db3c00;
+$linkColorHover: #953000;
+$textColor: #525252;
+$textColorLight: #6f6f6f;
+$dividerColor: #e7e7e7;
+$cardBackground: #fff;
+$searchBackground: #d3dff3;
+$errorBox: #db0000;
+$errorBoxText: #fff;
+$infoBox: #d7e1ff;
+$infoBoxText: $textColor;
+$pinColor: #f05a22;
+
+$inputTextColor: #7a7d8c;
+$inputBackgroundColor: #f9f9f9;
+$inputBackgroundFocusColor: #f1f1f1;
+
+.mdc-button {
+    border-radius: 25px !important;
+
+    &.mat-primary {
+        background-color: $primaryColor !important;
+    }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: $textColor;
+    overflow-y: scroll; // this is required to prevent page jumping which caused image to be smaller & pins being rendered incorrectly
+}
+
+a {
+    color: $linkColor;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.1ch;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        color: $linkColorHover;
+        text-decoration: underline;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    color: $primaryColor;
+}
+
+.divider {
+    border-bottom: solid 1px $dividerColor;
+}
+
+.card {
+    padding: 16px 24px;
+    background-color: $cardBackground;
+    box-shadow: rgb(0 0 0 / 3%) 0px 0px 8px, rgb(16 33 60 / 16%) 0px 8px 14px;
+    border-radius: 15px;
+
+    &.no-pad {
+        padding: 0px;
+    }
+}
+
+.light-text {
+    color: $textColorLight;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.w-cursor-pointer {
+    cursor: pointer;
+}
+
+.error-box {
+    padding: 16px 24px;
+    background-color: $errorBox;
+    color: $errorBoxText;
+    border-radius: 15px;
+}
+
+.info-box {
+    padding: 16px 24px;
+    background-color: $infoBox;
+    color: $infoBoxText;
+    border-radius: 15px;
+}
+
+.w-pin-image {
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .box {
+        border-radius: 50%;
+        background-color: $pinColor;
+        position: absolute;
+        font-size: 16px;
+        cursor: not-allowed;
+        padding: 8px;
+        top: 0;
+        left: 0;
+
+        &.editable {
+            cursor: move;
+        }
+
+        &.transform-50 {
+            transform: translate(-50%, -50%);
+        }
+
+        .pin-icon {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+    }
+
+    .pin-text {
+        position: absolute;
+        top: 0;
+        transform: translateY(-35px);
+        left: 10px;
+        white-space: nowrap;
+        display: block;
+        color: $pinColor;
+        font-size: 30px;
+        font-weight: 800;
+    }
+
+    .pin-text h3 {
+        font-size: 14px;
+        background-color: $primaryColor;
+        border: solid 2px $textColor;
+        color: $primaryColorContrast;
+        background-color: $primaryColor;
+        padding: 6px 12px;
+        border-radius: 15px;
+    }
+}
+
+textarea {
+    resize: vertical;
+    font-family: inherit;
+    color: $inputTextColor;
+    font-weight: 500;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: none;
+    background: $inputBackgroundColor;
+    border-radius: 15px;
+    padding: 16px 24px;
+    width: 100%;
+    min-height: 90px;
+
+    &:focus {
+        background: $inputBackgroundFocusColor;
+        border: none;
+        outline: none;
+    }
+}
+
+input[type='text'],
+input[type='number'],
+input[type='tel'],
+input[type='file'],
+input[type='email'],
+input[type='search'] {
+    font-family: inherit;
+    position: relative;
+    box-sizing: border-box;
+    background: $inputBackgroundColor;
+    color: $inputTextColor;
+    border: none;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 15px;
+    padding: 16px 24px;
+    width: 100%;
+
+    &:focus {
+        background: $inputBackgroundFocusColor;
+        border: none;
+        outline: none;
+    }
+}
+
+.lds-dual-ring {
+    display: inline-block;
+}
+.lds-dual-ring:after {
+    content: ' ';
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    border-radius: 50%;
+    border: 4px solid $primaryColor;
+    border-color: $primaryColor transparent $primaryColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
