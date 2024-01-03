@@ -23,6 +23,9 @@ $errorBox: #db0000;
 $errorBoxText: #fff;
 $infoBox: #d7e1ff;
 $infoBoxText: $textColor;
+$successBox: #117818;
+$successBoxText: #fff;
+
 
 body {
     font-family: 'Inter', sans-serif;
@@ -91,5 +94,12 @@ h5 {
     padding: 16px 24px;
     background-color: $infoBox;
     color: $infoBoxText;
+    border-radius: 15px;
+}
+
+.success-box {
+    padding: 16px 24px;
+    background-color: $successBox;
+    color: $successBoxText;
     border-radius: 15px;
 }

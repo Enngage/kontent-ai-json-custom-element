@@ -30,7 +30,7 @@ export class AppComponent extends CoreComponent implements OnInit {
         "name": "Author",
         "value": [
             "jenny_brown"
-        ]ě
+        ]
     }
 }`;
 
