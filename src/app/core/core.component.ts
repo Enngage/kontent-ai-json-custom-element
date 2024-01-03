@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, OnDestroy } from '@angular/core';
+import { Directive, OnDestroy } from '@angular/core';
 import { Subject, Observable, zip, of } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -6,19 +6,11 @@ import { map, takeUntil } from 'rxjs/operators';
 export abstract class CoreComponent implements OnDestroy {
     protected readonly ngUnsubscribe_: Subject<void> = new Subject<void>();
 
-    constructor(protected cdr: ChangeDetectorRef) {}
+    constructor() {}
 
     ngOnDestroy(): void {
         this.ngUnsubscribe_.next();
         this.ngUnsubscribe_.complete();
-    }
-
-    detectChanges(): void {
-        this.cdr.detectChanges();
-    }
-
-    markForCheck(): void {
-        this.cdr.markForCheck();
     }
 
     protected subscribeToObservable(observable: Observable<any>): void {

@@ -15,7 +15,6 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "17.0.8",
-        "@angular/cdk": "17.0.4",
         "@angular/common": "17.0.8",
         "@angular/compiler": "17.0.8",
         "@angular/core": "17.0.8",
@@ -23,10 +22,12 @@
         "@angular/material": "17.0.4",
         "@angular/platform-browser": "17.0.8",
         "@angular/platform-browser-dynamic": "17.0.8",
+        "stringify-object": "5.0.0",
         "@angular/router": "17.0.8",
         "rxjs": "7.8.1",
         "tslib": "2.6.2",
-        "zone.js": "0.14.2"
+        "zone.js": "0.14.2",
+        "shiki": "0.14.7"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "17.0.8",
@@ -34,6 +35,7 @@
         "@angular/compiler-cli": "17.0.8",
         "@types/jasmine": "5.1.4",
         "@types/node": "20.10.6",
+        "@types/stringify-object": "4.0.5",
         "codelyzer": "6.0.2",
         "jasmine-core": "5.1.1",
         "jasmine-spec-reporter": "7.0.0",

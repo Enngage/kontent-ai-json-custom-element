@@ -4,9 +4,7 @@
 
 export const environment = {
     production: false,
-    kontent: {
-        defaultImageUrl: 'https://assets-us-01.kc-usercontent.com/49dd6804-9199-0008-4731-0fd0ef1dfbc9/b1d7bf6e-af31-439f-8e9a-b5d1779c6fdf/rocket.jpg'
-    }
+    kontent: {}
 };
 
 /*

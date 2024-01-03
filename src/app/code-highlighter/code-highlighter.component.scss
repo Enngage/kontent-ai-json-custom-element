@@ -1,0 +1,42 @@
+.g-code {
+    .g-shiki-wrapper {
+        padding: 0;
+    }
+
+    pre {
+        overflow: auto;
+        overflow-wrap: break-word;
+        padding: 16px;
+        margin: 0;
+        white-space: pre-wrap;
+        border-radius: 15px;
+        word-break: break-all;
+    }
+    pre code {
+        white-space: pre-wrap;
+        font-family: Inconsolata, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 14px;
+    }
+
+    /* Line numbers start 
+    Source: https://github.com/shikijs/shiki/issues/3 
+    */
+    .g-shiki-line-numbers {
+        pre code {
+            counter-reset: step;
+            counter-increment: step 0;
+        }
+
+        pre code .line::before {
+            content: counter(step);
+            counter-increment: step;
+            width: 26px;
+            margin-right: 16px;
+            display: inline-block;
+            text-align: right;
+            color: rgba(201, 201, 201, 0.4);
+        }
+    }
+
+    /* Line numbers end */
+}

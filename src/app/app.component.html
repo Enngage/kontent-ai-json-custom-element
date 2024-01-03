@@ -1,12 +1,12 @@
-<div *ngIf="disabled">Element is disabled</div>
-<div *ngIf="!disabled">
-   
+<div *ngIf="disabled()">Element is disabled</div>
+<div *ngIf="!disabled()">
+    <app-code-highlighter [json]="json()"></app-code-highlighter>
 </div>
 
-<div *ngIf="infoMessage" class="info-box push-bottom push-top">
-    {{ infoMessage }}
+<div *ngIf="infoMessage() as message" class="info-box push-bottom push-top">
+    {{ message }}
 </div>
 
-<div *ngIf="errorMessage" class="error-box push-bottom push-top">
-    {{ errorMessage }}
+<div *ngIf="errorMessage() as message" class="error-box push-bottom push-top">
+    {{ message }}
 </div>

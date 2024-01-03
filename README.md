@@ -21,7 +21,13 @@ Netlify has made this easy. If you click the deploy button below, it will guide 
 
 ## Configuration
 
-No configuration required
+```json
+{
+    "sourceElement": "example"
+}
+```
+
+Where `sourceElement`is the codename of the element where JSON is stored
 
 ## What is Saved
 
@@ -51,4 +57,3 @@ Originally created by [@Enngage](https://github.com/Enngage)
 -   [Kentico Kontent's Integration documentation](https://docs.kontent.ai/tutorials/develop-apps/integrate/integrations-overview)
 -   [Custom Element documentation](https://docs.kontent.ai/tutorials/develop-apps/integrate/content-editing-extensions)
 -   [Custom Element API reference](https://docs.kontent.ai/reference/custom-elements-js-api)
-

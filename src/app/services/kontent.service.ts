@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, map, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 declare const CustomElement: any;
 
@@ -16,28 +16,21 @@ export interface ICustomElementContext {
     };
 }
 
+export interface IElementChangedData {
+    elementCodenames: string[];
+}
+
 interface IElementInit {
     isDisabled: boolean;
     value?: string;
     context: ICustomElementContext;
-    getElementValue: (elementCodename: string) => string | undefined;
-}
-
-interface AssetReference {
-    id: string;
-}
-
-export interface IAsset {
-    id: string;
-    url: string;
-    size: number;
-    name: string;
-    fileName: string;
+    config?: any;
 }
 
 @Injectable({ providedIn: 'root' })
 export class KontentService {
     public disabledChanged = new Subject<boolean>();
+    public elementsChanged = new Subject<IElementChangedData>();
     private initialized: boolean = false;
 
     constructor() {}
@@ -51,11 +44,15 @@ export class KontentService {
                     this.disabledChanged.next(disabled);
                 });
 
+                CustomElement.observeElementChanges([], (data: IElementChangedData) => {
+                    this.elementsChanged.next(data);
+                });
+
                 onInit({
                     context: context,
                     value: element.value,
                     isDisabled: element.disabled,
-                    getElementValue: (elementCodename) => CustomElement.getElementValue(elementCodename)
+                    config: element.config
                 });
             });
         } catch (error) {
@@ -69,52 +66,17 @@ export class KontentService {
         }
     }
 
+    getElementValue(elementCodename: string, newValueCallback: (newValue: string) => void): void {
+        if (this.initialized) {
+            CustomElement.getElementValue(elementCodename, (value: string) => {
+                newValueCallback(value);
+            });
+        }
+    }
+
     updateSizeToMatchHtml(height: number): void {
         if (this.initialized) {
             CustomElement.setHeight(height);
         }
-    }
-
-    getAssetDetails(assetId: string): Observable<IAsset | null> | null {
-        if (this.initialized) {
-            const selectAssetPromise = CustomElement.getAssetDetails([assetId]) as Promise<IAsset[] | null>;
-
-            if (selectAssetPromise) {
-                return from(selectAssetPromise).pipe(
-                    map((result) => {
-                        if (result && result.length) {
-                            return result[0];
-                        }
-
-                        return null;
-                    })
-                );
-            }
-        }
-
-        return null;
-    }
-
-    selectAsset(): Observable<string | null> | null {
-        if (this.initialized) {
-            const selectAssetPromise = CustomElement.selectAssets({
-                allowMultiple: false,
-                fileType: 'images'
-            }) as Promise<AssetReference[] | null>;
-
-            if (selectAssetPromise) {
-                return from(selectAssetPromise).pipe(
-                    map((result) => {
-                        if (result && result.length) {
-                            return result[0].id;
-                        }
-
-                        return null;
-                    })
-                );
-            }
-        }
-
-        return null;
     }
 }

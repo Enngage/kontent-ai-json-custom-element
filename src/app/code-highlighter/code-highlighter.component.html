@@ -1,0 +1,14 @@
+<div class="push-bottom">
+    @if (validationResult(); as validationResult) { @if (!validationResult.isValid) {
+    <div class="error-box">JSON is invalid: {{ validationResult.errorMessage }}</div>
+    } @else {
+    <div class="info-box">JSON is valid</div>
+
+    } }
+</div>
+
+<div class="g-code">
+    <div class="g-shiki-wrapper g-shiki-line-numbers">
+        <div class="language-json" [innerHTML]="highlightedJson() | safeHtml"></div>
+    </div>
+</div>
