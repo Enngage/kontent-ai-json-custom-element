@@ -1,9 +1,11 @@
 <div class="push-bottom">
-    @if (validationResult(); as validationResult) { @if (!validationResult.isValid) {
+    @if (validationResult(); as validationResult) { @if (validationResult.state === 'invalid') {
     <div class="error-box">JSON is invalid: {{ validationResult.errorMessage }}</div>
-    } @else {
+    } @else if (validationResult.state === 'valid') {
     <div class="info-box">JSON is valid</div>
 
+    } @else if (validationResult.state === 'empty') {
+    <div class="info-box">JSON element is empty</div>
     } }
 </div>
 

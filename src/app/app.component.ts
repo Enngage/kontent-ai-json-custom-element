@@ -1,18 +1,9 @@
-import {
-    AfterViewChecked,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    ElementRef,
-    OnInit,
-    ViewChild,
-    WritableSignal,
-    signal
-} from '@angular/core';
+import { ChangeDetectionStrategy, OnInit, WritableSignal, signal } from '@angular/core';
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CoreComponent } from './core/core.component';
 import { KontentService } from './services/kontent.service';
-import { debounceTime, map, Subject } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -55,8 +46,9 @@ export class AppComponent extends CoreComponent implements OnInit {
                 (data) => {
                     this.disabled.set(data.isDisabled);
                     this.json.set(data.value ?? '');
-                    console.log('CONFIG', data.config);
+
                     this.sourceElementCodename.set(data.config[this.sourceElementConfigPropertyName]);
+                    this.updateJsonValue();
                 },
                 (error) => {
                     console.error(error);
@@ -89,17 +81,19 @@ export class AppComponent extends CoreComponent implements OnInit {
         super.subscribeToObservable(
             this.kontentService.elementsChanged.pipe(
                 map((data) => {
-                    // read element data
-                    const sourceElementCodename = this.sourceElementCodename();
-
-                    if (sourceElementCodename) {
-                        this.kontentService.getElementValue(sourceElementCodename, (newValue) => {
-                            this.json.set(newValue?.toString() ?? '');
-                        });
-                    }
+                    this.updateJsonValue();
                 })
             )
         );
+    }
+
+    private updateJsonValue(): void {
+        const sourceElementCodename = this.sourceElementCodename();
+        if (sourceElementCodename) {
+            this.kontentService.getElementValue(sourceElementCodename, (newValue) => {
+                this.json.set(newValue?.toString() ?? '');
+            });
+        }
     }
 
     private isKontentContext(): boolean {

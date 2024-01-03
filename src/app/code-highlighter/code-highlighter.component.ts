@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, Signal, ViewEncapsulation, WritableSignal, computed, signal } from '@angular/core';
-import { getHighlighter, Highlighter, Lang } from 'shiki';
+import { getHighlighter } from 'shiki';
 import { CoreComponent } from '../core/core.component';
 import { catchError, from, map } from 'rxjs';
 import { angularErrorHelper } from 'src/helpers/angular-error-helper.class';
 
+type ValidationState = 'empty' | 'valid' | 'invalid';
+
 interface IJsonValidationResult {
-    isValid: boolean;
+    state: ValidationState;
     errorMessage?: string;
 }
 
@@ -59,17 +61,22 @@ export class CodeHighlighterComponent extends CoreComponent implements OnInit {
         );
     }
 
-    private validateJson(text: string): { isValid: boolean; errorMessage?: string } {
+    private validateJson(text: string | undefined): IJsonValidationResult {
+        if (!text) {
+            return {
+                state: 'empty'
+            };
+        }
         try {
             JSON.parse(text);
         } catch (error) {
             return {
-                isValid: false,
+                state: 'invalid',
                 errorMessage: angularErrorHelper.extractErrorMessage(error)
             };
         }
         return {
-            isValid: true
+            state: 'valid'
         };
     }
 }
