@@ -1,4 +1,4 @@
-![Last modified][last-commit]
+[!Last modified][last-commit]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
