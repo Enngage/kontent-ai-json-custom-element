@@ -1,14 +1,39 @@
 <div>
     @if (validationResult(); as validationResult) { @if (validationResult.state === 'invalid') {
-    <div class="error-box">JSON is invalid: {{ validationResult.errorMessage }}</div>
+    <div class="error-box">
+        <div libFlexRow [libFlexRowGap]="'8px'">
+            <div libFlexColumn><mat-icon>warning</mat-icon></div>
+            <div libFlexColumn>JSON is invalid: {{ validationResult.errorMessage }}</div>
+        </div>
+    </div>
     } @else if (validationResult.state === 'valid') {
-    <div class="success-box">JSON is valid</div>
+
+    <div class="success-box">
+        <div libFlexRow [libFlexRowGap]="'8px'">
+            <div libFlexColumn><mat-icon>done</mat-icon></div>
+            <div libFlexColumn>JSON is valid</div>
+        </div>
+    </div>
 
     } @else if (validationResult.state === 'empty') {
-    <div class="info-box">JSON element is empty</div>
+
+    <div class="info-box">
+        <div libFlexRow [libFlexRowGap]="'8px'">
+            <div libFlexColumn><mat-icon>info</mat-icon></div>
+            <div libFlexColumn>JSON element is empty</div>
+        </div>
+    </div>
     } @else if (validationResult.state === 'notJson') {
     <div class="info-box">
-        Validation skipped -> value does not start with either <strong>{{ '{' }}</strong> or <strong>]</strong> char
+        <div libFlexRow [libFlexRowGap]="'8px'">
+            <div libFlexColumn><mat-icon>info</mat-icon></div>
+            <div libFlexColumn>
+                <div>
+                    Validation skipped -> value does not start with either <strong>{{ '{' }}</strong> or
+                    <strong>]</strong> char
+                </div>
+            </div>
+        </div>
     </div>
     } }
 </div>
@@ -17,7 +42,10 @@
 <div class="push-top">
     <div class="push-bottom">
         <button mat-flat-button [color]="'primary'" (click)="handleToggleCode()">
-            {{ isExpanded() ? 'Hide code' : 'Expand code' }}
+            <div libFlexRow [libFlexRowGap]="'8px'">
+                <div libFlexColumn>{{ isExpanded() ? 'Hide code' : 'Expand code' }}</div>
+                <div libFlexColumn><mat-icon>{{ isExpanded() ? 'expand_more' : 'chevron_right' }}</mat-icon></div>
+            </div>
         </button>
     </div>
 
