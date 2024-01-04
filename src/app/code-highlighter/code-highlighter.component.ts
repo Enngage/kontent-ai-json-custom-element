@@ -1,12 +1,23 @@
-import { Component, Input, OnInit, Signal, ViewEncapsulation, WritableSignal, computed, signal } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    Signal,
+    ViewEncapsulation,
+    WritableSignal,
+    computed,
+    signal
+} from '@angular/core';
 import { getHighlighter } from 'shiki';
 import { CoreComponent } from '../core/core.component';
 import { catchError, from, map } from 'rxjs';
 import { angularErrorHelper } from 'src/helpers/angular-error-helper.class';
 
-type ValidationState = 'empty' | 'valid' | 'invalid';
+export type ValidationState = 'empty' | 'valid' | 'invalid' | 'notJson';
 
-interface IJsonValidationResult {
+export interface IJsonValidationResult {
     state: ValidationState;
     errorMessage?: string;
 }
@@ -23,10 +34,22 @@ export class CodeHighlighterComponent extends CoreComponent implements OnInit {
         return this.validateJson(this.json());
     });
 
+    public readonly isExpanded: WritableSignal<boolean> = signal(false);
+
+    public readonly canShowCodePreview: Signal<boolean> = computed(() => {
+        if (this.json().length) {
+            return true;
+        }
+        return false;
+    });
+
     public readonly json: WritableSignal<string> = signal('');
     @Input({ required: true, alias: 'json' }) set _json(value: string) {
         this.json.set(value);
+        this.validate.next(this.validationResult());
     }
+
+    @Output() validate = new EventEmitter<IJsonValidationResult>();
 
     constructor() {
         super();
@@ -61,12 +84,24 @@ export class CodeHighlighterComponent extends CoreComponent implements OnInit {
         );
     }
 
+    handleToggleCode(): void {
+        this.isExpanded.set(!this.isExpanded());
+    }
+
     private validateJson(text: string | undefined): IJsonValidationResult {
         if (!text) {
             return {
                 state: 'empty'
             };
         }
+
+        if (!text.startsWith('{') && !text.startsWith('[')) {
+            // text / example does not represent json value
+            return {
+                state: 'notJson'
+            };
+        }
+
         try {
             JSON.parse(text);
         } catch (error) {

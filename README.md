@@ -31,7 +31,7 @@ Where `sourceElement`is the codename of the element where JSON is stored
 
 ## What is Saved
 
-This element doesn't store anything
+The element stores text value of `1` if the JSON is valid, otherwise nothing is stored
 
 ## Development
 

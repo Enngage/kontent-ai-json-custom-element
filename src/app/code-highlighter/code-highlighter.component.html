@@ -1,4 +1,4 @@
-<div class="push-bottom">
+<div>
     @if (validationResult(); as validationResult) { @if (validationResult.state === 'invalid') {
     <div class="error-box">JSON is invalid: {{ validationResult.errorMessage }}</div>
     } @else if (validationResult.state === 'valid') {
@@ -6,11 +6,27 @@
 
     } @else if (validationResult.state === 'empty') {
     <div class="info-box">JSON element is empty</div>
+    } @else if (validationResult.state === 'notJson') {
+    <div class="info-box">
+        Validation skipped -> value does not start with either <strong>{{ '{' }}</strong> or <strong>]</strong> char
+    </div>
     } }
 </div>
 
-<div class="g-code">
-    <div class="g-shiki-wrapper g-shiki-line-numbers">
-        <div class="language-json" [innerHTML]="highlightedJson() | safeHtml"></div>
+@if (canShowCodePreview()) {
+<div class="push-top">
+    <div class="push-bottom">
+        <button mat-flat-button [color]="'primary'" (click)="handleToggleCode()">
+            {{ isExpanded() ? 'Hide code' : 'Expand code' }}
+        </button>
     </div>
+
+    @if (isExpanded()) {
+    <div class="g-code">
+        <div class="g-shiki-wrapper g-shiki-line-numbers">
+            <div class="language-json" [innerHTML]="highlightedJson() | safeHtml"></div>
+        </div>
+    </div>
+    }
 </div>
+}

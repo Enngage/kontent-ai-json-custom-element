@@ -1,6 +1,6 @@
 <div *ngIf="disabled()">Element is disabled</div>
 <div *ngIf="!disabled()">
-    <app-code-highlighter [json]="json()"></app-code-highlighter>
+    <app-code-highlighter [json]="json()" (validate)="handleValidate($event)"></app-code-highlighter>
 </div>
 
 <div *ngIf="infoMessage() as message" class="info-box push-bottom push-top">

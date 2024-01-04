@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CoreComponent } from './core/core.component';
 import { KontentService } from './services/kontent.service';
 import { map } from 'rxjs';
+import { IJsonValidationResult } from './code-highlighter/code-highlighter.component';
 
 @Component({
     selector: 'app-root',
@@ -52,9 +53,7 @@ export class AppComponent extends CoreComponent implements OnInit {
                 },
                 (error) => {
                     console.error(error);
-                    this.errorMessage.set(
-                        `Could not initialize custom element. Custom elements can only be embedded in an iframe`
-                    );
+                    this.errorMessage.set(`Could not initialize custom element. See console for full error details.`);
                 }
             );
         } else {
@@ -74,6 +73,14 @@ export class AppComponent extends CoreComponent implements OnInit {
                     this.kontentService.updateSizeToMatchHtml(height);
                 }
             }, 50);
+        }
+    }
+
+    handleValidate(result: IJsonValidationResult): void {
+        if (result.state === 'invalid') {
+            this.kontentService.setValue(null);
+        } else {
+            this.kontentService.setValue('1');
         }
     }
 

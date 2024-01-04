@@ -26,7 +26,6 @@ $infoBoxText: $textColor;
 $successBox: #117818;
 $successBoxText: #fff;
 
-
 body {
     font-family: 'Inter', sans-serif;
     color: $textColor;
@@ -102,4 +101,14 @@ h5 {
     background-color: $successBox;
     color: $successBoxText;
     border-radius: 15px;
+}
+
+.mdc-button {
+    border-radius: 25px !important;
+
+    &.mat-primary {
+        background-color: white !important;
+        color: #151515 !important;
+        border: solid 1px rgb(168, 168, 168);
+    }
 }
